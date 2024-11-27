@@ -7,6 +7,9 @@
 ## 介绍
 - 使用 vllm 后端 在 colab 上运行[Sakura-14B-Qwen2.5-v1.0-exl2](https://huggingface.co/zye1235357/Backup_hf_sakura-14b-qwen2.5-v1.0-exl2/tree/main)模型
 
+## 使用
+- 请先从 Huggingface 上下载模型至本地 [Sakura-14B-Qwen2.5-v1.0-exl2](https://huggingface.co/zye1235357/Backup_hf_sakura-14b-qwen2.5-v1.0-exl2/tree/main)，再上传至 Google Drive
+
 
 ## 致谢
 - [SakuraLLM](https://github.com/SakuraLLM/SakuraLLM)

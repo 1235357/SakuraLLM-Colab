@@ -108,78 +108,70 @@ By following these simple steps, you'll ensure that all dependencies are properl
 
 ---
 
-### **Step 3: API Forwarding Configuration with Static Domain**  
 
-For an easy setup, you can use the **static domain** `devoted-hen-awaited.ngrok-free.app` provided by ngrok. This eliminates the need to generate new URLs each time you run the notebook.
 
----
 
-#### **Steps to Use Static Domain for API Forwarding**
 
-1. **Static Domain**:  
-   The **static domain** assigned to you by ngrok is `devoted-hen-awaited.ngrok-free.app`. This domain will stay the same even after restarting the notebook, making it ideal for a one-click setup.
 
-2. **Running the Backend with the Static Domain**:  
-   You don’t need to worry about generating or changing URLs every time. Instead, you can directly use the following command in the notebook to bind your API to the static domain:  
+### **Step 3: Ngrok API Forwarding Configuration**  
 
-   ```bash
-   !ngrok http --domain=devoted-hen-awaited.ngrok-free.app 8001
-   ```
-
-   This binds the API server running on port `8001` to the static domain `devoted-hen-awaited.ngrok-free.app`. Once executed, your API will be available at the following fixed URL:
-
-   ```
-   http://devoted-hen-awaited.ngrok-free.app:8001
-   ```
-
-   You can use this URL for all API requests, and it will remain valid across multiple sessions.
-
-3. **Verify Your API**:  
-   After running the command, ngrok will output confirmation that the domain is active, and your API is now publicly accessible at the static domain. There is no need to manually update the URL each time you restart the notebook.
-
----
-
-#### **Why This Setup is Ideal for "One-Click" Usage**
-
-- **No Dynamic URL Changes**:  
-  Unlike traditional ngrok usage, where the URL changes every time the server restarts, using a static domain ensures a permanent and consistent API endpoint.
-
-- **Simplicity**:  
-  By default, users can start the notebook and immediately get a ready-to-use, fixed API endpoint without needing to modify or worry about different URLs.
-
-- **Efficiency**:  
-  This simplifies API integration into other projects, as the endpoint remains the same.
-
----
-
-### **Final Code Snippet for Step 3 (with Static Domain)**
-
-For users who want to set up the API forwarding with minimal changes, here is the complete code snippet you can provide to them:
-
+Set up ngrok with a static domain for consistent API access:  
 ```python
-# Set the ngrok static domain for easy, one-click usage
-ngrokToken = ""  # Optional: If you want to use ngrok with a custom token, add it here
+from pyngrok import conf, ngrok
 
-# Use the provided static domain for API forwarding
-!ngrok http --domain=devoted-hen-awaited.ngrok-free.app 8001
+# Replace with your ngrok authentication token
+ngrokToken = "YOUR_NGROK_TOKEN"
+
+if ngrokToken:
+    conf.get_default().auth_token = ngrokToken
+    conf.get_default().monitor_thread = False
+
+    try:
+        # Start ngrok tunnel with the custom domain
+        ssh_tunnel = ngrok.connect(8001, bind_tls=True, hostname="devoted-hen-awaited.ngrok-free.app")
+        public_url = ssh_tunnel.public_url
+        print('Custom Domain Address: ' + public_url)
+    except Exception as e:
+        print(f"Error starting ngrok tunnel: {e}")
+else:
+    print("Ngrok token is not set. Please provide a valid token.")
 ```
 
-Once you run this, the notebook will automatically forward the API to the static domain, making it accessible at:
+To monitor the ngrok server status:  
+```python
+import time
+import requests
 
+def monitor_server():
+    while True:
+        try:
+            response = requests.get("http://127.0.0.1:4040/api/tunnels")  # Local ngrok API
+            tunnels = response.json().get("tunnels", [])
+            for tunnel in tunnels:
+                print(f"Public URL: {tunnel['public_url']}")
+        except Exception as e:
+            print(f"Error: {e}")
+        time.sleep(30)
+
+monitor_server()
 ```
-http://devoted-hen-awaited.ngrok-free.app:8001
-```
 
----
 
-### **Reminder**:  
 
-- This static domain is permanent and linked to your account.
-- Ensure you are using the domain `devoted-hen-awaited.ngrok-free.app` to avoid confusion and ensure smooth API access.
 
----
 
-This configuration simplifies the process for users who just want to "plug and play" without dealing with dynamic URLs each time they use the notebook. By using the provided static domain, all users can quickly set up their API with minimal steps.
+
+
+
+
+
+
+
+
+
+
+
+
 
 ⏳ **Output**: The notebook will display your public API URL. Save this for use in API requests.  
 

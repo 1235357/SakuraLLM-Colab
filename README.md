@@ -68,22 +68,118 @@ ROOT_PATH = "/content"
 ```  
 
 ---
-
 ### **Step 2: Install Required Libraries**  
-Run this command in Colab to install all dependencies:  
+
+To install all necessary libraries, run the following command in your Colab notebook:  
+
 ```bash
 !pip install --upgrade pip
 !pip install transformers tokenizers vllm huggingface-hub flask pyngrok triton torch
-```  
+```
 
 ---
 
-### **Step 3: API Forwarding Configuration**  
-- If you have an **ngrok token**, paste it into the `ngrokToken` variable:  
-  ```python
-  ngrokToken = "YOUR_NGROK_TOKEN"  # Replace with your token
-  ```
-- If no token is provided, the notebook will use **localtunnel** by default.  
+### **Important Note:**  
+
+Sometimes, during the installation process, you may encounter errors or warnings similar to the one shown below:  
+
+<div align="center">  
+<img src="https://github.com/user-attachments/assets/aa34e879-48d2-4896-9881-3b932741e665" width="600" alt="Installation Warning Example">  
+</div>  
+
+**What to do:**  
+This is a normal occurrence, especially in Colab environments. Simply follow the instructions provided by the error message. In most cases, you can resolve the issue by clicking:  
+
+1. **Runtime** (in the top Colab menu).  
+2. Select **"Run all"** to restart the setup process.  
+
+If it prompts you to re-enable certain permissions or runtime settings, accept those changes.
+
+---
+
+For further reassurance, here's another example of such an error you might see:  
+
+<div align="center">  
+<img src="https://github.com/user-attachments/assets/3b6955e0-d7d2-42ce-a167-318d2c69b6f5" width="600" alt="Runtime Restart Example">  
+</div>  
+
+By following these simple steps, you'll ensure that all dependencies are properly installed and your environment is correctly configured. If you continue to face issues, consider resetting the Colab runtime and re-running the commands.
+
+
+---
+
+### **Step 3: API Forwarding Configuration with Static Domain**  
+
+For an easy setup, you can use the **static domain** `devoted-hen-awaited.ngrok-free.app` provided by ngrok. This eliminates the need to generate new URLs each time you run the notebook.
+
+---
+
+#### **Steps to Use Static Domain for API Forwarding**
+
+1. **Static Domain**:  
+   The **static domain** assigned to you by ngrok is `devoted-hen-awaited.ngrok-free.app`. This domain will stay the same even after restarting the notebook, making it ideal for a one-click setup.
+
+2. **Running the Backend with the Static Domain**:  
+   You don’t need to worry about generating or changing URLs every time. Instead, you can directly use the following command in the notebook to bind your API to the static domain:  
+
+   ```bash
+   !ngrok http --domain=devoted-hen-awaited.ngrok-free.app 8001
+   ```
+
+   This binds the API server running on port `8001` to the static domain `devoted-hen-awaited.ngrok-free.app`. Once executed, your API will be available at the following fixed URL:
+
+   ```
+   http://devoted-hen-awaited.ngrok-free.app:8001
+   ```
+
+   You can use this URL for all API requests, and it will remain valid across multiple sessions.
+
+3. **Verify Your API**:  
+   After running the command, ngrok will output confirmation that the domain is active, and your API is now publicly accessible at the static domain. There is no need to manually update the URL each time you restart the notebook.
+
+---
+
+#### **Why This Setup is Ideal for "One-Click" Usage**
+
+- **No Dynamic URL Changes**:  
+  Unlike traditional ngrok usage, where the URL changes every time the server restarts, using a static domain ensures a permanent and consistent API endpoint.
+
+- **Simplicity**:  
+  By default, users can start the notebook and immediately get a ready-to-use, fixed API endpoint without needing to modify or worry about different URLs.
+
+- **Efficiency**:  
+  This simplifies API integration into other projects, as the endpoint remains the same.
+
+---
+
+### **Final Code Snippet for Step 3 (with Static Domain)**
+
+For users who want to set up the API forwarding with minimal changes, here is the complete code snippet you can provide to them:
+
+```python
+# Set the ngrok static domain for easy, one-click usage
+ngrokToken = ""  # Optional: If you want to use ngrok with a custom token, add it here
+
+# Use the provided static domain for API forwarding
+!ngrok http --domain=devoted-hen-awaited.ngrok-free.app 8001
+```
+
+Once you run this, the notebook will automatically forward the API to the static domain, making it accessible at:
+
+```
+http://devoted-hen-awaited.ngrok-free.app:8001
+```
+
+---
+
+### **Reminder**:  
+
+- This static domain is permanent and linked to your account.
+- Ensure you are using the domain `devoted-hen-awaited.ngrok-free.app` to avoid confusion and ensure smooth API access.
+
+---
+
+This configuration simplifies the process for users who just want to "plug and play" without dealing with dynamic URLs each time they use the notebook. By using the provided static domain, all users can quickly set up their API with minimal steps.
 
 ⏳ **Output**: The notebook will display your public API URL. Save this for use in API requests.  
 

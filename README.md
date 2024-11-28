@@ -38,8 +38,19 @@ This repository offers an easy-to-use Google Colab notebook to deploy the **[Sak
 ### 📊 Example Usage  
 Below is a visualization of how the API to be used. Input any text in the prompt for dynamic results!  
 <div align="center">  
-<img src="https://github.com/user-attachments/assets/894c9935-b7d3-4ea0-af3b-af4876899573" width="600">  
+<img src="https://github.com/user-attachments/assets/e17d1536-c372-4519-ac30-07b6cc6bbcf6" width="600">  
 </div>  
+
+
+<div align="center">  
+<img src="https://github.com/user-attachments/assets/ade15643-d324-4ca9-ac1e-4bc20f9e0fd6" width="600">  
+</div>  
+
+
+<div align="center">  
+<img src="https://github.com/user-attachments/assets/a2b623a5-6c94-44d3-9d7f-d93db8b8eae8" width="600">  
+</div>  
+
 
 ---
 
@@ -117,63 +128,41 @@ By following these simple steps, you'll ensure that all dependencies are properl
 
 Set up ngrok with a static domain for consistent API access:  
 ```python
-from pyngrok import conf, ngrok
+# Run API backend (vLLM)
+# Use ngrok for API mapping
+from huggingface_hub import hf_hub_download
 
-# Replace with your ngrok authentication token
-ngrokToken = "YOUR_NGROK_TOKEN"
+# Set the ngrok authentication token
+ngrokToken = "2pR573GJUUUuRlAPKFQcKemTJk7_2uisJCJJ8ng8ERcwBexTp"
 
 if ngrokToken:
+    from pyngrok import conf, ngrok
+    
+    # Configure the ngrok authentication token
     conf.get_default().auth_token = ngrokToken
     conf.get_default().monitor_thread = False
 
+    # Start ngrok tunnel with the custom domain
     try:
-        # Start ngrok tunnel with the custom domain
         ssh_tunnel = ngrok.connect(8001, bind_tls=True, hostname="devoted-hen-awaited.ngrok-free.app")
         public_url = ssh_tunnel.public_url
         print('Custom Domain Address: ' + public_url)
     except Exception as e:
         print(f"Error starting ngrok tunnel: {e}")
-else:
-    print("Ngrok token is not set. Please provide a valid token.")
+
+
+
+%cd $ROOT_PATH
+
+# Download the model for the first time
+!HF_ENDPOINT=https://huggingface.co huggingface-cli download SakuraLLM/Sakura-14B-Qwen2.5-v1.0-GGUF --local-dir models --include sakura-14b-qwen2.5-v1.0-q6k.gguf
+
+!RAY_memory_monitor_refresh_ms="0" HF_ENDPOINT=https://huggingface.co OMP_NUM_THREADS=36 VLLM_ATTENTION_BACKEND=XFORMERS vllm serve ./models/sakura-14b-qwen2.5-v1.0-q6k.gguf --tokenizer Qwen/Qwen2.5-14B-Instruct --dtype float16 --api-key token-abc123 --kv-cache-dtype auto --max-model-len 4096 --tensor-parallel-size 1 --gpu-memory-utilization 0.99 --disable-custom-all-reduce --enforce-eager --use-v2-block-manager --disable-log-requests --host 0.0.0.0 --port 8001 --served-model-name "Qwen2.5-14B-Instruct" &
+
+
 ```
 
-To monitor the ngrok server status:  
-```python
-import time
-import requests
-
-def monitor_server():
-    while True:
-        try:
-            response = requests.get("http://127.0.0.1:4040/api/tunnels")  # Local ngrok API
-            tunnels = response.json().get("tunnels", [])
-            for tunnel in tunnels:
-                print(f"Public URL: {tunnel['public_url']}")
-        except Exception as e:
-            print(f"Error: {e}")
-        time.sleep(30)
-
-monitor_server()
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-⏳ **Output**: The notebook will display your public API URL. Save this for use in API requests.  
+⏳ **Output**: The notebook will display your public API URL ***in the first line***. Save this for use in API requests.  
 
 ---
 

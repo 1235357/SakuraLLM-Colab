@@ -173,21 +173,51 @@ By following these simple steps, you'll ensure that all dependencies are properl
 
 
 
+---
+
+### **Step 3: API Forwarding Configuration Using Ngrok or Cloudflare**
+
+This step helps you configure API forwarding so that your application can be accessed over the internet, even if you don't have a static domain. We'll guide you through two options:
+
+1. **Using Ngrok** - For static domain forwarding with a custom domain.  
+2. **Using Cloudflare Tunnel** - For temporary API access.  
 
 ---
 
+#### **Option 1: Using Ngrok (Static Domain)**
 
+Ngrok simplifies API forwarding by providing a secure and reliable tunnel. If you need a static domain for consistent access, follow these steps:
 
-### **Step 3: Ngrok API Forwarding Configuration**  
+---
 
-This step guides you through setting up API forwarding using ngrok or an alternative (Cloudflare) if a static domain is not available.  
+##### **Steps to Set Up Ngrok**
 
-#### **Option 1: Using Ngrok (Static Domain)**  
-Follow these steps to configure ngrok for consistent API access with a static custom domain:  
+1. **Get Your Ngrok Authentication Token**  
+   - Visit [Ngrok's Dashboard](https://dashboard.ngrok.com/get-started/your-authtoken).  
+   - Sign up or log in to your account.  
+   - Copy your **authentication token** from the page.
+
+   <div align="center">  
+   <img src="https://github.com/user-attachments/assets/26b7f148-d540-4f65-bd29-2a0009c719cc" width="600">  
+   </div>  
+
+2. **Obtain a Free Static Domain**  
+   - Navigate to the **Domains** section on the [Ngrok Dashboard](https://dashboard.ngrok.com/domains).  
+   - Click **"New Domain"** to create a free static domain for your API.  
+
+   <div align="center">  
+   <img src="https://github.com/user-attachments/assets/1baa2d73-46fb-4a67-91b2-db261fdb48bd" width="600">  
+   </div>  
+
+---
+
+##### **Python Code for Ngrok Configuration**
+
+Add the following Python code to your project to set up Ngrok with your static domain:
 
 ```python
-# Set the ngrok authentication token
-ngrokToken = "2pR573GJUUUuRlAPKFQcKemTJk7_2uisJCJJ8ng8ERcwBexTp"
+# Set the ngrok authentication token (get it from https://dashboard.ngrok.com/get-started/your-authtoken)
+ngrokToken = ""  # Add your token here
 
 if ngrokToken:
     from pyngrok import conf, ngrok
@@ -198,38 +228,68 @@ if ngrokToken:
 
     # Start ngrok tunnel with the custom domain
     try:
-        ssh_tunnel = ngrok.connect(8001, bind_tls=True, hostname="devoted-hen-awaited.ngrok-free.app")
+        # Set the ngrok free static domain (from https://dashboard.ngrok.com/domains)
+        ssh_tunnel = ngrok.connect(8001, bind_tls=True, hostname="")
         public_url = ssh_tunnel.public_url
         print('Custom Domain Address: ' + public_url)
     except Exception as e:
         print(f"Error starting ngrok tunnel: {e}")
-
-
-⏳ **Output**: The notebook will display your public API URL ***in the first line***. Save this for use in API requests.  
-
-#### **Option 2: Using Cloudflare Tunnel (Temporary URL)**  
-If you don't have a static domain or ngrok authentication token, you can use Cloudflare's `cloudflared` as an alternative:  
-
-```bash
-# Navigate to the root path
-%cd $ROOT_PATH
-
-# Download the cloudflared binary
-!wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
-!chmod a+x cloudflared
-
-# Start a Cloudflare tunnel for API access
-!./cloudflared tunnel --url localhost:8001
 ```
 
-⏳ **Output**: A temporary Cloudflare URL will be displayed. Use this URL for API requests.  
+---
 
+##### **Expected Output**
+- The script will display your public API URL on the **first line** of the output.  
+- Save this URL; you’ll use it for making API requests.  
 
+---
 
+#### **Option 2: Using Cloudflare Tunnel (Temporary URL)**
 
+If you don’t have a static domain or an Ngrok authentication token, Cloudflare’s `cloudflared` provides a quick, temporary URL for API access.  
 
+---
 
+##### **Steps to Set Up Cloudflare Tunnel**
 
+1. **Download the `cloudflared` Binary**  
+   Run the following commands to download and prepare `cloudflared` for use:
+
+   ```bash
+   # Navigate to the root path of your project
+   %cd $ROOT_PATH
+
+   # Download the latest Cloudflare binary
+   !wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
+   !chmod a+x cloudflared
+   ```
+
+2. **Start the Tunnel**  
+   Execute this command to open a Cloudflare tunnel:
+
+   ```bash
+   !./cloudflared tunnel --url localhost:8001
+   ```
+
+---
+
+##### **Expected Output**
+- A temporary Cloudflare URL will appear in the output.  
+- Use this URL for testing API requests during your development session.  
+
+---
+
+#### **Tips for Beginners**
+
+- **Ngrok vs. Cloudflare**:  
+   - Use **Ngrok** if you need a persistent, custom domain for reliable API access.  
+   - Use **Cloudflare** for a quick, temporary solution without account setup.  
+
+- **Best Practices**:  
+   - Save the displayed URLs immediately after running the commands.  
+   - Test the connection by accessing the URL in your browser or API client.
+
+By following these steps, you’ll successfully set up API forwarding for your project using either Ngrok or Cloudflare.
 
 
 

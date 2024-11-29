@@ -52,11 +52,18 @@ Below is a visualization of how the API to be used. Input any text in the prompt
 </div>  
 
 
-> The vLLM backend supports adding multiple translators at the same time (request concurrency)
+>
+>> The vLLM backend supports adding multiple translators at the same time (request concurrency)
+>
 
 
 <div align="center">  
-<img src="https://github.com/user-attachments/assets/5c9a63f9-ab64-472d-bfcc-bfe6569c2c94" width="600">  
+<img src="https://github.com/user-attachments/assets/dfe4597c-ab74-4a14-a3d0-5de3d00b21d2" width="600">  
+</div>  
+
+
+<div align="center">  
+<img src="https://github.com/user-attachments/assets/01b07aa1-6667-487e-be1a-11c9ae92d55f" width="600">  
 </div>  
 
 
@@ -124,6 +131,9 @@ For further reassurance, here's another example of such an error you might see:
 </div>  
 
 By following these simple steps, you'll ensure that all dependencies are properly installed and your environment is correctly configured. If you continue to face issues, consider resetting the Colab runtime and re-running the commands.
+
+
+
 
 
 ---

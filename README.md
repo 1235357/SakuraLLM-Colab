@@ -52,6 +52,15 @@ Below is a visualization of how the API to be used. Input any text in the prompt
 </div>  
 
 
+> The vLLM backend supports adding multiple translators at the same time (request concurrency)
+
+
+<div align="center">  
+<img src="https://github.com/user-attachments/assets/5c9a63f9-ab64-472d-bfcc-bfe6569c2c94" width="600">  
+</div>  
+
+
+
 ---
 
 ## 🛠️ Prerequisites  
@@ -121,17 +130,14 @@ By following these simple steps, you'll ensure that all dependencies are properl
 
 
 
-
-
-
 ### **Step 3: Ngrok API Forwarding Configuration**  
 
-Set up ngrok with a static domain for consistent API access:  
-```python
-# Run API backend (vLLM)
-# Use ngrok for API mapping
-from huggingface_hub import hf_hub_download
+This step guides you through setting up API forwarding using ngrok or an alternative (Cloudflare) if a static domain is not available.  
 
+#### **Option 1: Using Ngrok (Static Domain)**  
+Follow these steps to configure ngrok for consistent API access with a static custom domain:  
+
+```python
 # Set the ngrok authentication token
 ngrokToken = "2pR573GJUUUuRlAPKFQcKemTJk7_2uisJCJJ8ng8ERcwBexTp"
 
@@ -151,53 +157,63 @@ if ngrokToken:
         print(f"Error starting ngrok tunnel: {e}")
 
 
-
-%cd $ROOT_PATH
-
-# Download the model for the first time
-!HF_ENDPOINT=https://huggingface.co huggingface-cli download SakuraLLM/Sakura-14B-Qwen2.5-v1.0-GGUF --local-dir models --include sakura-14b-qwen2.5-v1.0-q6k.gguf
-
-!RAY_memory_monitor_refresh_ms="0" HF_ENDPOINT=https://huggingface.co OMP_NUM_THREADS=36 VLLM_ATTENTION_BACKEND=XFORMERS vllm serve ./models/sakura-14b-qwen2.5-v1.0-q6k.gguf --tokenizer Qwen/Qwen2.5-14B-Instruct --dtype float16 --api-key token-abc123 --kv-cache-dtype auto --max-model-len 4096 --tensor-parallel-size 1 --gpu-memory-utilization 0.99 --disable-custom-all-reduce --enforce-eager --use-v2-block-manager --disable-log-requests --host 0.0.0.0 --port 8001 --served-model-name "Qwen2.5-14B-Instruct" &
-
-
-```
-
 ⏳ **Output**: The notebook will display your public API URL ***in the first line***. Save this for use in API requests.  
 
----
+#### **Option 2: Using Cloudflare Tunnel (Temporary URL)**  
+If you don't have a static domain or ngrok authentication token, you can use Cloudflare's `cloudflared` as an alternative:  
 
-### **Step 4: Download the Model**  
-First-time users must download the model to the working directory:  
 ```bash
-!HF_ENDPOINT=https://huggingface.co huggingface-cli download SakuraLLM/Sakura-14B-Qwen2.5-v1.0-GGUF \
-  --local-dir models \
-  --include sakura-14b-qwen2.5-v1.0-q6k.gguf
+# Navigate to the root path
+%cd $ROOT_PATH
+
+# Download the cloudflared binary
+!wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
+!chmod a+x cloudflared
+
+# Start a Cloudflare tunnel for API access
+!./cloudflared tunnel --url localhost:8001
 ```
 
+⏳ **Output**: A temporary Cloudflare URL will be displayed. Use this URL for API requests.  
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
-### **Step 5: Launch vLLM Backend**  
-Start the API backend with this command:  
+### **Step 4: Downloading the Model and Starting the API Server**  
+
+Once the tunnel is set up, proceed to download the model and run the API server:  
+
 ```bash
-!RAY_memory_monitor_refresh_ms="0" HF_ENDPOINT=https://huggingface.co OMP_NUM_THREADS=36 VLLM_ATTENTION_BACKEND=XFORMERS \
-  vllm serve ./models/sakura-14b-qwen2.5-v1.0-q6k.gguf \
-  --tokenizer Qwen/Qwen2.5-14B-Instruct \
-  --dtype float16 \
-  --api-key token-abc123 \
-  --kv-cache-dtype auto \
-  --max-model-len 4096 \
-  --tensor-parallel-size 1 \
-  --gpu-memory-utilization 0.99 \
-  --disable-custom-all-reduce \
-  --enforce-eager \
-  --use-v2-block-manager \
-  --disable-log-requests \
-  --host 0.0.0.0 \
-  --port 8001 \
-  --served-model-name "Qwen2.5-14B-Instruct" &
+# Navigate to the root path
+%cd $ROOT_PATH
+
+# Download the model from Hugging Face
+!HF_ENDPOINT=https://huggingface.co huggingface-cli download SakuraLLM/Sakura-14B-Qwen2.5-v1.0-GGUF --local-dir models --include sakura-14b-qwen2.5-v1.0-q6k.gguf
+
+# Start the API server with vLLM
+!RAY_memory_monitor_refresh_ms="0" HF_ENDPOINT=https://huggingface.co OMP_NUM_THREADS=36 \
+VLLM_ATTENTION_BACKEND=XFORMERS vllm serve ./models/sakura-14b-qwen2.5-v1.0-q6k.gguf \
+--tokenizer Qwen/Qwen2.5-14B-Instruct --dtype float16 --api-key token-abc123 \
+--kv-cache-dtype auto --max-model-len 4096 --tensor-parallel-size 1 \
+--gpu-memory-utilization 0.99 --disable-custom-all-reduce --enforce-eager \
+--use-v2-block-manager --disable-log-requests --host 0.0.0.0 --port 8001 \
+--served-model-name "Qwen2.5-14B-Instruct" &
 ```
 
-💻 **Result**: A public API URL (e.g., `http://localhost:8001` or an ngrok URL).  
+⏳ **Output**: Your API backend will start, and you can use the displayed public URL from the previous step for making requests.
+
+
 
 ---
 
@@ -223,21 +239,101 @@ print(response.json())
 
 ---
 
+
+
+
+
+
+
 ## ❓ FAQ  
 
 ### **Q1: What is the purpose of mounting Google Drive?**  
-Mounting Drive ensures all downloaded models and intermediate data are saved for future sessions. Without this, data is erased when Colab disconnects.  
+Mounting Drive ensures that all downloaded models and intermediate data are preserved between sessions. Without this, data is erased when Colab disconnects.  
 
 ### **Q2: Do I need a powerful GPU?**  
-No, the notebook is designed for free-tier Colab GPUs. However, performance may improve with Colab Pro or rented GPUs.  
+No, the notebook is designed for use with free-tier Colab GPUs. However, performance and speed may improve if you use Colab Pro, Colab Pro+, or rented GPUs with higher memory capacity.  
 
-### **Q3: How do I troubleshoot API connection issues?**  
-- Ensure `ngrokToken` is correctly set (if using ngrok).  
-- Check the public URL displayed after Step 5.  
-- Restart the notebook if problems persist.  
+### **Q3: I encountered the error "Failed to infer device type." What does it mean?**  
+This typically happens when:  
+1. Insufficient GPU memory is available for the model.  
+2. The notebook is configured to use GPU, but Colab assigns a CPU-only runtime.  
+3. A dependency conflict in the environment.
 
-### **Q4: Can I modify the model?**  
-Yes! Fine-tune the model using tools like Hugging Face’s **transformers** library. For large models, ensure adequate GPU resources.  
+#### Solutions:  
+- Check if the assigned runtime is GPU-enabled (`Runtime > Change runtime type > Hardware accelerator > GPU`).  
+- Verify that the model's size fits within your GPU’s memory capacity (15GB is usually sufficient for most tasks).  
+- Restart the runtime, clear storage if needed, and re-run the notebook.
+
+---
+
+### **Q4: How do I troubleshoot API connection issues?**  
+
+#### If you're using ngrok:  
+- Ensure your `ngrokToken` is correctly set and matches your ngrok account.  
+- Confirm that the generated public URL appears in the output after Step 3.  
+- Verify the connection by opening the public URL in a browser to check the API's availability.  
+
+#### If the public URL works but not in the Sakura workspace:  
+- Ensure the API Key specified during setup (e.g., `--api-key token-abc123`) matches the key used in Sakura.  
+- Double-check the model name (e.g., `--served-model-name "Qwen2.5-14B-Instruct"`) for consistency.  
+
+For Cloudflare users, remember that the URL is temporary and may require reconfiguration between sessions.  
+
+---
+
+### **Q5: Can I modify the model?**  
+Yes! The notebook supports fine-tuning or modifications to the model using tools like Hugging Face's **transformers** library. For large models, ensure you have sufficient GPU resources. Cloud environments may not always support extensive fine-tuning, but you can use your local machine or rented servers for advanced customization.
+
+---
+
+### **Q6: What is the API Key and model name?**  
+- The **API Key** is manually set during the vLLM backend setup. For example, in the code:  
+  ```bash
+  --api-key token-abc123
+  ```
+  Use the same API Key (`token-abc123`) in the Sakura workspace or other applications.  
+
+- The **model name** is defined in the setup as:  
+  ```bash
+  --served-model-name "Qwen2.5-14B-Instruct"
+  ```
+  Ensure you input this exact model name in the application using the API.  
+
+---
+
+### **Q7: Why doesn’t the public API URL work with the Sakura workspace?**  
+This is commonly due to:  
+1. **Incorrect API Key**: Ensure the key matches what was set during the vLLM server startup.  
+2. **Model name mismatch**: The model name used in the backend must match the one configured in the Sakura workspace.  
+3. **Dynamic URLs**: If you use a non-static URL (e.g., without a custom ngrok domain), the URL changes with each session.  
+
+#### Suggested Solution:  
+- Double-check the API Key and model name used in the workspace.  
+- For persistent URLs, use a static ngrok domain or migrate to a local hosting setup for stability.  
+
+---
+
+### **Q8: Is it safe to use Colab for this project?**  
+Using Colab for personal or research projects is generally acceptable. However, avoid engaging in activities that violate Google's [usage policies](https://research.google.com/colaboratory/faq.html?hl=en#disallowed-activities), such as excessive resource usage or sharing Colab-generated APIs publicly without restrictions. Always respect the terms of service to prevent potential limitations or bans.  
+
+---
+
+### **Q9: Is there a one-click setup?**  
+Yes! The Colab notebook includes a one-click launcher link for streamlined operation. Simply open the link and run all cells without modifying the code. This setup is tested to work seamlessly as long as runtime conditions are met.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 

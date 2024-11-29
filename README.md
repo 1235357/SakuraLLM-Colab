@@ -19,12 +19,12 @@
 4. [📊 Example Usage](#-example-usage)
 5. [🛠️ Prerequisites](#️-prerequisites)
 6. [📋 Step-by-Step Explanation](#-step-by-step-explanation)
-   - [Step 1: Mount Google Drive](#step-1-mount-google-drive)
-   - [Step 2: Install Required Libraries](#step-2-install-required-libraries)
-   - [Step 3: Ngrok API Forwarding Configuration](#step-3-ngrok-api-forwarding-configuration)
-     - [Option 1: Using Ngrok](#option-1-using-ngrok-static-domain)
-     - [Option 2: Using Cloudflare Tunnel](#option-2-using-cloudflare-tunnel-temporary-url)
-   - [Step 4: Downloading the Model and Starting the API Server](#step-4-downloading-the-model-and-starting-the-api-server)
+    - [Step 1: Mount Google Drive (Highly Suggest)](#step-1-mount-google-drive-highly-suggest)  
+    - [Step 2: Install Required Libraries](#step-2-install-required-libraries)  
+    - [Step 3: API Forwarding Configuration Using Ngrok or Cloudflare](#step-3-api-forwarding-configuration-using-ngrok-or-cloudflare)  
+        - [Option 1: Using Ngrok (Static Domain)](#option-1-using-ngrok-static-domain)  
+        - [Option 2: Using Cloudflare Tunnel (Temporary URL)](#option-2-using-cloudflare-tunnel-temporary-url)  
+    - [Step 4: Downloading the Model and Starting the API Server](#step-4-downloading-the-model-and-starting-the-api-server)  
 7. [🔧 Testing the API](#-testing-the-api)
    - [Python Example Code](#python-example-code)
 8. [❓ FAQ](#-faq)
@@ -38,6 +38,9 @@
    - [Q8: Is it safe to use Colab for this project?](#q8-is-it-safe-to-use-colab-for-this-project)
    - [Q9: Is there a one-click setup?](#q9-is-there-a-one-click-setup)
 9. [🙌 Acknowledgments](#-acknowledgments)
+
+
+
 
 
 

@@ -8,24 +8,26 @@
 
 ---
 
+
+
 # 📑 Table of Contents
 
-1. [⚠️ Important Warning ⚠️](#⚠️-important-warning-⚠️)
-2. [📖 Introduction](#📖-introduction)
-   - [💡 Key Features](#💡-key-features)
-3. [🚀 One-Click Launch in Colab](#🚀-one-click-launch-in-colab)
-4. [📊 Example Usage](#📊-example-usage)
-5. [🛠️ Prerequisites](#🛠️-prerequisites)
-6. [📋 Step-by-Step Explanation](#📋-step-by-step-explanation)
+1. [⚠️ Important Warning ⚠️](#️-important-warning-️)
+2. [📖 Introduction](#-introduction)
+   - [💡 Key Features](#-key-features)
+3. [🚀 One-Click Launch in Colab](#-one-click-launch-in-colab)
+4. [📊 Example Usage](#-example-usage)
+5. [🛠️ Prerequisites](#️-prerequisites)
+6. [📋 Step-by-Step Explanation](#-step-by-step-explanation)
    - [Step 1: Mount Google Drive](#step-1-mount-google-drive)
    - [Step 2: Install Required Libraries](#step-2-install-required-libraries)
    - [Step 3: Ngrok API Forwarding Configuration](#step-3-ngrok-api-forwarding-configuration)
      - [Option 1: Using Ngrok](#option-1-using-ngrok-static-domain)
      - [Option 2: Using Cloudflare Tunnel](#option-2-using-cloudflare-tunnel-temporary-url)
    - [Step 4: Downloading the Model and Starting the API Server](#step-4-downloading-the-model-and-starting-the-api-server)
-7. [🔧 Testing the API](#🔧-testing-the-api)
+7. [🔧 Testing the API](#-testing-the-api)
    - [Python Example Code](#python-example-code)
-8. [❓ FAQ](#❓-faq)
+8. [❓ FAQ](#-faq)
    - [Q1: What is the purpose of mounting Google Drive?](#q1-what-is-the-purpose-of-mounting-google-drive)
    - [Q2: Do I need a powerful GPU?](#q2-do-i-need-a-powerful-gpu)
    - [Q3: I encountered the error "Failed to infer device type." What does it mean?](#q3-i-encountered-the-error-failed-to-infer-device-type-what-does-it-mean)
@@ -35,7 +37,8 @@
    - [Q7: Why doesn’t the public API URL work with the Sakura workspace?](#q7-why-doesnt-the-public-api-url-work-with-the-sakura-workspace)
    - [Q8: Is it safe to use Colab for this project?](#q8-is-it-safe-to-use-colab-for-this-project)
    - [Q9: Is there a one-click setup?](#q9-is-there-a-one-click-setup)
-9. [🙌 Acknowledgments](#🙌-acknowledgments)
+9. [🙌 Acknowledgments](#-acknowledgments)
+
 
 
 ---

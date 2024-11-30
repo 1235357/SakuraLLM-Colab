@@ -122,6 +122,9 @@ To get started, you’ll need:
 
 ## 📋 Step-by-Step Explaination  
 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/1235357/SakuraLLM-Colab/blob/main/sakura_14b_qwen2_5_v1_0_q6k_gguf_Colab.ipynb)  
+
+
 ### **Step 1: Mount Google Drive (Highly Suggest)**  
 Mounting Google Drive ensures you can save models persistently across sessions.  
 Paste this code into a Colab cell:  
@@ -326,6 +329,7 @@ VLLM_ATTENTION_BACKEND=XFORMERS vllm serve ./models/sakura-14b-qwen2.5-v1.0-q6k.
 
 
 
+
 ---
 
 ## 🔧 Testing the API  
@@ -351,6 +355,7 @@ print(response.json())
 ---
 
 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/1235357/SakuraLLM-Colab/blob/main/sakura_14b_qwen2_5_v1_0_q6k_gguf_Colab.ipynb)  
 
 
 

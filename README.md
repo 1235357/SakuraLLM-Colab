@@ -84,11 +84,14 @@ This initiative is not merely an attempt to access free computational power; rat
 
 
 
+![image](https://github.com/user-attachments/assets/7a67a119-130d-4715-8135-d90e46bd843c)
 
 
 
 
+![image](https://github.com/user-attachments/assets/2402b0c1-15cb-4a06-87b6-40adb448003d)
 
+![image](https://github.com/user-attachments/assets/318e25a9-c88c-4d75-82a6-28bc385a27c0)
 
 
 ### **Step 7: Configure GPT Workspace**
@@ -97,6 +100,10 @@ This initiative is not merely an attempt to access free computational power; rat
 - **Connection**: `https://star-vocal-haddock.ngrok-free.app` *(Static domain provided; users may replace it with their own Ngrok static domain)*
 - **Key**: `token-abc123`
 - **Parallel Processing**: Duplicate translation instances with modified names to enable concurrent executions.
+
+
+![image](https://github.com/user-attachments/assets/4df1f813-4287-4546-910e-3328ff68a55e)
+
 
 ### **Step 8: Finalizing Execution**
 - Once translation tasks are completed, **stop the debugging session**.

@@ -58,7 +58,8 @@ This initiative is not merely an attempt to access free computational power; rat
 
 ![image](https://github.com/user-attachments/assets/42d59633-d9de-4ef6-a5d2-ebe472b51ecb)
 
-![image](https://github.com/user-attachments/assets/68cfa096-829c-4c02-88b6-bfca5ea69807)
+![image](https://github.com/user-attachments/assets/5de42ad0-a43a-4203-99dd-8297481e3833)
+
 
 
 

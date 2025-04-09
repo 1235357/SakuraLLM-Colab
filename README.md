@@ -28,6 +28,18 @@ This initiative is not merely an attempt to access free computational power; rat
 - Create an account using this link: [OpenI Sign-up](https://git.openi.org.cn/user/sign_up?sharedUser=zye).
 - Registration URL: [https://openi.pcl.ac.cn/user/sign_up?sharedUser=zye](https://openi.pcl.ac.cn/user/sign_up?sharedUser=zye).
 
+![image](https://github.com/user-attachments/assets/a6460e6f-975c-4d13-b025-f9f4adf7345b)
+
+![image](https://github.com/user-attachments/assets/da61c3ed-f0f0-49fc-b911-32558b33e963)
+
+![image](https://github.com/user-attachments/assets/58545568-814e-4e27-b934-c43d80f564b0)
+
+![image](https://github.com/user-attachments/assets/02c7bf66-c628-4219-a691-a77b17b6f474)
+
+
+
+
+
 ### **Step 2: Create a New Cloud Task**
 - Navigate to the [SakuraLLM repository](https://git.openi.org.cn/zye/sakura-14b-qwen2.5-v1.0-q6k) on OpenI.
 - Initiate a **"Cloud Brain"** task.
@@ -38,13 +50,23 @@ This initiative is not merely an attempt to access free computational power; rat
   - Image address: `192.168.242.50:1443/default-workspace/2a72307689ae49758c80c896fffda0a1/image:sakura-14b-qwen2.5-v1.0-q6k`
   - Model selection: Search for `Backup_hf_sakura-14b-qwen2.5-v1.0-q6k` in the **Public Models** section and select it.
 
+![image](https://github.com/user-attachments/assets/b0512813-b744-4361-a787-4c5b2fc2645e)
 
 ### **Step 4: Deploy and Start Computation**
 - Launch the task and wait for the **Cloud Brain** environment to initialize.
 
+![image](https://github.com/user-attachments/assets/f8e43e90-478b-4a42-aa3f-63530ff229a2)
+
+
+![image](https://github.com/user-attachments/assets/62ec65f1-f7d5-4923-9b5a-4e92c50a07be)
+
+
 ### **Step 5: Download Repository Code**
 - Obtain the repository files from [this link](https://git.openi.org.cn/zye/sakura-14b-qwen2.5-v1.0-q6k/archive/master.zip).
 - Extract the contents to access the **Jupyter Notebook** file.
+
+
+
 
 ### **Step 6: Upload and Execute Jupyter Notebook**
 - Once the **Cloud Brain** environment is active, open **Jupyter Lab**.
@@ -59,6 +81,11 @@ This initiative is not merely an attempt to access free computational power; rat
 ![image](https://github.com/user-attachments/assets/42d59633-d9de-4ef6-a5d2-ebe472b51ecb)
 
 ![image](https://github.com/user-attachments/assets/5de42ad0-a43a-4203-99dd-8297481e3833)
+
+
+
+
+
 
 
 

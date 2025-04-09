@@ -108,6 +108,11 @@ This initiative is not merely an attempt to access free computational power; rat
 ### **Step 8: Finalizing Execution**
 - Once translation tasks are completed, **stop the debugging session**.
 
+![image](https://github.com/user-attachments/assets/bab07223-edb2-463f-9570-5d8c914a53da)
+
+![image](https://github.com/user-attachments/assets/c000b64e-1deb-4f93-893a-81d7158c8aad)
+
+
 ---
 ## **Setting Up Ngrok**
 ### **Step 1: Obtain Ngrok Authentication Token**

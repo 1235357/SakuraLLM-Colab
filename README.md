@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2917cacb-c409-474a-9bb5-16814c0e2626)
+
 
 
 # SakuraLLM: Advancing Large Language Model Research

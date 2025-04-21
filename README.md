@@ -83,15 +83,13 @@ This initiative is not merely an attempt to access free computational power; rat
 ![image](https://github.com/user-attachments/assets/5de42ad0-a43a-4203-99dd-8297481e3833)
 
 
-
-![image](https://github.com/user-attachments/assets/7a67a119-130d-4715-8135-d90e46bd843c)
-
+![image](https://github.com/user-attachments/assets/40b288ef-8763-4014-a33b-47ab7e687550)
 
 
+![image](https://github.com/user-attachments/assets/e526f4a0-7879-4764-b133-fdb7c07c1bb8)
 
-![image](https://github.com/user-attachments/assets/2402b0c1-15cb-4a06-87b6-40adb448003d)
 
-![image](https://github.com/user-attachments/assets/318e25a9-c88c-4d75-82a6-28bc385a27c0)
+![image](https://github.com/user-attachments/assets/e74aac28-47dc-47f9-b706-bd07e124af35)
 
 
 ### **Step 7: Configure GPT Workspace**

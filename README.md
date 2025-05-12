@@ -1,7 +1,7 @@
 
 
 
-# SakuraLLM: Advancing Large Language Model Research
+# SakuraLLM: Advancing Large Language Model Research in Japanse2Chinese Translation
 
 ## Introduction
 
@@ -164,7 +164,7 @@ This initiative is not merely an attempt to access free computational power; rat
   SakuraLLM
 </h1>
 <center>
-  <b>Sakura</b>: <b><ins>S</ins></b>FT <ins><b>A</b></ins>nd RLHF models using <ins><b>K</b></ins>nowledge of <ins><b>U</b></ins>niversal Character and <ins><b>R</b></ins>elationship <ins><b>A</b></ins>ttributes for Japanese to Chinese Translation in Light Novel & Galgame Domain.
+  <b>Sakura</b>: <b><ins>S</ins></b>FT <ins><b>A</b></ins>nd RLHF models using <ins><b>K</b></ins>nowledge of <ins><b>U</b></ins>niversal Character and <ins><b>R</b></ins>elationship <ins><b>A</b></ins>ttributes for Japanese to Chinese Translation.
 </center>
 </div>
 

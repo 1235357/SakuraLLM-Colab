@@ -178,7 +178,7 @@ This initiative is not merely an attempt to access free computational power; rat
 ## 1. Project Overview
 
 ### 1.1 Introduction
-**SakuraLLM** (SFT and RLHF models using Knowledge of Universal Character and Relationship Attributes) is an open-source Japanese-to-Chinese translation model specifically optimized for ACGN (Anime, Comic, Game, Novel) content domains including light novels and visual novels (Galgame). Built upon foundational models from the Qwen series, it achieves domain-specific translation capabilities through continued pretraining and fine-tuning on Japanese-Chinese bilingual corpora.
+**SakuraLLM** (SFT and RLHF models using Knowledge of Universal Character and Relationship Attributes) is an open-source Japanese-to-Chinese translation model specifically optimized for ACGN content domains including light novels and visual novels. Built upon foundational models from the Qwen series, it achieves domain-specific translation capabilities through continued pretraining and fine-tuning on Japanese-Chinese bilingual corpora.
 
 ### 1.2 Key Features
 - **Domain Specialization**: Optimized for ACGN content with stylistic adaptation to light novel narratives and visual novel dialogues.
